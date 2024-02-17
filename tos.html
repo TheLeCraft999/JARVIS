@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JARVIS -- TOS, TOU, EULA</title>
     <style>
-        body {
-            background-color: #e8e8e8;
-        }
         .page-section {
             font-family: "Arial", sans-serif;
         }
@@ -20,10 +17,98 @@
             padding: 10px;
             margin: -10px;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(44, 44, 44);
+            color: white;
+        }
+        .left-header {
+            width: 100%;
+            margin-top: 5px;
+            margin-left: 2%;
+            align-items: center;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        #jarvis-text {
+            color: white;
+            text-decoration: none;
+        }
+        #jarvis-text:hover {
+            color: rgb(71, 89, 208);
+        }
+        .logo {
+            width: 50px;
+            margin-right: 20px;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+        }
+        /*.home_button {
+            text-align: right; 
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }*/
+        .tos_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .support_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .download_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .changelog_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        /* .home_button:hover {
+            color: rgb(71, 89, 208);
+        } */
+        .tos_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .support_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .download_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .changelog_button:hover {
+            color: rgb(71, 89, 208);
+        }
     </style>
 
 </head>
 <body>
+    <div class="header">
+        <div class="left-header">
+            <a href="index.html">
+                <img class="logo" src="assets/thaliumz.png" alt="ThaliumZ-Logo">
+            </a>
+            <a href="index.html" id="jarvis-text"><h2>JARVIS</h2></a>
+        </div>
+        <div class="nav-link">
+            <a class="download_button" href="download.html"><h2 id="download_button">DOWNLOAD</h2></a>
+            <a class="changelog_button" href="changelog.html"><h2 id="changelog_button">CHANGELOG</h2></a>
+            <a class="tos_button" href="tos.html"><h2 id="tos_button">TOS</h2></a>
+            <a class="support_button" href="https://github.com/TheLeCraft999/jarvis/issues"><h2 id="support_button">SUPPORT</h2></a>
+        </div>
+    </div>
     <div class="page-section">
         <div class="justify-center">
             <div class="TOS">

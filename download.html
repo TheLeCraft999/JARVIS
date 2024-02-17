@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS -- Download</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(44, 44, 44);
+            color: white;
+        }
+        .left-header {
+            width: 100%;
+            margin-top: 5px;
+            margin-left: 2%;
+            align-items: center;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        #jarvis-text {
+            color: white;
+            text-decoration: none;
+        }
+        #jarvis-text:hover {
+            color: rgb(71, 89, 208);
+        }
+        .logo {
+            width: 50px;
+            margin-right: 20px;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .tos_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .support_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .download_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .changelog_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .tos_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .support_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .download_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .changelog_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .upper-download {
+            display: flex;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        .software-download {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 20px;
+        }
+        .documentation-download {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 20px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<script>
+    function download_software() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/installer.py';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'installer.py';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_docs() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/JARVIS DOCUMENTATION.pdf';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'installer.py';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+<body>
+    <div class="header">
+            <div class="left-header">
+            <a href="index.html">
+                <img class="logo" src="assets/thaliumz.png" alt="ThaliumZ-Logo">
+            </a>
+            <a href="index.html" id="jarvis-text"><h2>JARVIS</h2></a>
+        </div>
+        <div class="nav-link">
+            <a class="download_button" href="download.html"><h2 id="download_button">DOWNLOAD</h2></a>
+            <a class="changelog_button" href="changelog.html"><h2 id="changelog_button">CHANGELOG</h2></a>
+            <a class="tos_button" href="tos.html"><h2 id="tos_button">TOS</h2></a>
+            <a class="support_button" href="https://github.com/TheLeCraft999/jarvis/issues"><h2 id="support_button">SUPPORT</h2></a>
+        </div>
+    </div>
+    <div class="upper-download">
+        <div class="software-download">
+            <h1>Software-Download</h1>
+            <p><b>Version:</b> 0.2.10</p>
+            <h2>System-Requirements</h2>
+            <p><b>CPU:</b> Intel i5-5200 or better</p>
+            <p><b>RAM:</b> 4 GB or more</p>
+            <p><b>Storage:</b> 2 GB</p>
+            <p><b>GPU:</b> Irrelevant</p>
+            <button onclick="download_software()">Download JARVIS</button>
+        </div>
+        <div class="documentation-download">
+            <h1>Documentation-Download</h1>
+            <p><b>Version:</b> 0.2.0</p>
+            <p>Download the Documentation, in which</p>
+            <p>you can find everything you need to operate JARVIS</p>
+            <button onclick="download_docs()">Download Documentation</button>
+        </div>
+    </div>
+</body>
+</html>

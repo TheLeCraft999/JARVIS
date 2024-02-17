@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS -- Changelog</title>
+
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(44, 44, 44);
+            color: white;
+        }
+        .left-header {
+            width: 100%;
+            margin-top: 5px;
+            margin-left: 2%;
+            align-items: center;
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        #jarvis-text {
+            color: white;
+            text-decoration: none;
+        }
+        #jarvis-text:hover {
+            color: rgb(71, 89, 208);
+        }
+        .logo {
+            width: 50px;
+            margin-right: 20px;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .tos_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .support_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .download_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .changelog_button {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .tos_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .support_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .download_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        .changelog_button:hover {
+            color: rgb(71, 89, 208);
+        }
+        
+        .main {
+            overflow: none;
+        }
+        .menu {
+            margin-top: 10px;
+            border: 1px solid black;
+            float: left;
+            width: 14%;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        .menu-link {
+            display: block;
+            text-decoration: none;
+            border: 1px solid black;
+            padding: 5px;
+            margin-bottom: 5px;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+        .menu-link:hover {
+            color: rgb(71, 89, 208);
+        }
+        .log {
+            margin-left: 16%;
+            box-sizing: border-box;
+            max-width: 100%;
+            width: 70%;
+            padding: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-header">
+            <a href="index.html">
+                <img class="logo" src="assets/thaliumz.png" alt="ThaliumZ-Logo">
+            </a>
+            <a href="index.html" id="jarvis-text"><h2>JARVIS</h2></a>
+        </div>
+        <div class="nav-link">
+            <a class="download_button" href="download.html"><h2 id="download_button">DOWNLOAD</h2></a>
+            <a class="changelog_button" href="changelog.html"><h2 id="changelog_button">CHANGELOG</h2></a>
+            <a class="tos_button" href="tos.html"><h2 id="tos_button">TOS</h2></a>
+            <a class="support_button" href="https://github.com/TheLeCraft999/jarvis/issues"><h2 id="support_button">SUPPORT</h2></a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="menu">
+            <h3>Navigation-Menu</h3>
+            <a href="#v0.2.10" class="menu-link"><b>v 0.2.10</b></a>
+            <a href="#v0.2.9" class="menu-link"><b>v 0.2.9</b></a>
+            <a href="#v0.2.8" class="menu-link"><b>v 0.2.8</b></a>
+            <a href="#v0.2.7" class="menu-link"><b>v 0.2.7</b></a>
+            <a href="#v0.2.6" class="menu-link"><b>v 0.2.6</b></a>
+            <a href="#v0.2.5" class="menu-link"><b>v 0.2.5</b></a>
+            <a href="#v0.2.4" class="menu-link"><b>v 0.2.4</b></a>
+            <a href="#v0.2.3" class="menu-link"><b>v 0.2.3</b></a>
+            <a href="#v0.2.2" class="menu-link"><b>v 0.2.2</b></a>
+            <a href="#v0.2.1" class="menu-link"><b>v 0.2.1</b></a>
+            <a href="#v0.2.0" class="menu-link"><b>v 0.2.0</b></a>
+            <a href="#v0.1.5" class="menu-link"><b>v 0.1.5</b></a>
+            <a href="#v0.1.4" class="menu-link"><b>v 0.1.4</b></a>
+            <a href="#v0.1.3" class="menu-link"><b>v 0.1.3</b></a>
+            <a href="#v0.1.2" class="menu-link"><b>v 0.1.2</b></a>
+            <a href="#v0.1.1" class="menu-link"><b>v 0.1.1</b></a>
+            <a href="#v0.1.0" class="menu-link"><b>v 0.1.0</b></a>
+            <a href="#v0.0.0" class="menu-link"><b>v 0.0.0</b></a>
+            <h6>Date-Format: MM-DD-YYYY</h6>
+        </div>
+        <div class="log">
+            <div id="v0.2.10">
+                <h2>v 0.2.10 (02-01-2023)</h2>
+                <p><b>[FIXED]</b> Updater</p>
+            </div>
+            <div id="v0.2.9">
+                <h2>v 0.2.9 (01-01-2024)</h2>
+                <p><b>[ADDED]</b> Performance Fix</p>
+                <p><b>[ADDED]</b> Setup-Command</p>
+            </div>
+            <div id="v0.2.8">
+                <h2>v 0.2.8 (11-14-2023)</h2>
+                <p><b>[ADDED]</b> Advanced Import-System</p>
+                <p><b>[ADDED</b></p>
+            </div>
+            <div id="v0.2.7">
+                <h2>v 0.2.7 (10-11-2023)</h2>
+                <p><b>[FIXED]</b> Performance Fix</p>
+                <p><b>[ADDED]</b> Each Commands has now a own File</p>
+            </div>
+            <div id="v0.2.6">
+                <h2>v 0.2.6 (09-23-2023)</h2>
+                <p><b>[FIXED]</b> Performance Fix</p>
+                <p><b>[ADDED]</b> Updater</p>
+            </div>
+            <div id="v0.2.5">
+                <h2>v 0.2.5 (06-17-2023)</h2>
+                <p><b>[ADDED]</b> Control-Command</p>
+            </div>
+            <div id="v0.2.4">
+                <h2>v 0.2.4 (04-01-2023)</h2>
+                <p><b>[ADDED]</b> Openprogramm-Command</p>
+                <p><b>[ADDED]</b> Writedown-Command</p>
+            </div>
+            <div id="v0.2.3">
+                <h2>v 0.2.3 (03-01-2023)</h2>
+                <p><b>[ADDED]</b> Weather-Command</p>
+                <p><b>[ADDED]</b> Randomnumber-Command</p>
+            </div>
+            <div id="v0.2.2">
+                <h2>v 0.2.2 (03-01-2023)</h2>
+                <p><b>[ADDED]</b> Time Command</p>
+                <p><b>[ADDED]</b> Date-Command</p>
+                <p><b>[ADDED]</b> Help-Command</p>
+            </div>
+            <div id="v0.2.1">
+                <h2>v 0.2.1 (02-01-2023)</h2>
+                <p><b>[ADDED]</b> Keyword-System</p>
+                <p><b>[FIXED]</b> Runtime improved</p>
+            </div>
+            <div id="v0.2.0">
+                <h2>v 0.2.0 (01-01-2023)</h2>
+                <p>Fresh Start from scratch</p>
+            </div>
+            <div id="v0.1.5">
+                <h2>v 0.1.5 (10-06-2022)</h2>
+                <p><b>[REMOVED]</b> Todolist-System</p>
+            </div>
+            <div id="v0.1.4">
+                <h2>v 0.1.4 (09-12-2022)</h2>
+                <p><b>[CHANGED]</b> Voice-Variable now stored in a sperate file</p>
+                <p><b>[CHANGED]</b> Password now stored in a sperate file</p>
+                <p><b>[ADDED]</b> Todolist-System</p>
+            </div>
+            <div id="v0.1.3">
+                <h2>v 0.1.3 (07-04-2022)</h2>
+                <p><b>[FIXED]</b> Speech-Recognition System is now more reliable</p>
+                <p><b>[CHANGED]</b> Weahter-Command Assest are now in variables to be changed more easily</p>
+            </div>
+            <div id="v0.1.2">
+                <h2>v 0.1.2 (06-23-2022)</h2>
+                <p><b>[ADDED]</b> Weather-Command</p>
+                <p><b>[ADDED]</b> Password-Lock</p>
+                <p><b>[CHANGED]</b> Voice-Variable</p>
+            </div>
+            <div id="v0.1.1">
+                <h2>v 0.1.1 (05-01-2022)</h2>
+                <p><b>[ADDED]</b> commands.py file</p>
+                <p><b>[ADDED]</b> Run Command on Speech</p>
+                <p><b>[ADDED]</b> Time-Command</p>
+                <p><b>[ADDED]</b> Date-Command</p>
+            </div>
+            <div id="v0.1.0">
+                <h2>v 0.1.0 (03-20-2022)</h2>
+                <p><b>[ADDED]</b> Spech-Recognition</p>
+                <p><b>[ADDED]</b> Speak-System</p>
+            </div>
+            <div id="v0.0.0">
+                <h2>v 0.0.0 (03-09-2022)</h2>
+                <p>Begin of the project</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
