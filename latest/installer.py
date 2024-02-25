@@ -1,157 +1,110 @@
 import os
-
 os.system('cmd /c "pip install ttkbootstrap"')
 os.system('cmd /c "pip install requests"')
-#os.system('cmd /c "pip install pyllamacpp"')
-
-import tkinter as tk
 import ttkbootstrap as ttk
-import threading
+from threading import Thread
 import requests
-#from huggingface_hub import hf_hub_download
-#from pyllamacpp.model import Model
-
 
 class script():
-    def juno():    # JUst NOthing
+    def juno():
         pass
 
-    def install_and_download():
+    def download_and_install():
+        action_count = 2
         accept_button.configure(command=script.juno, text='Installing...')
-        license_text.configure(state='normal')
-        license_text.delete('1.0', 'end')
-        license_text.insert('end', 'Installing Libraries...')
-
-
         url_l = 'https://thelecraft999.github.io/jarvis/latest/libs.txt'
         destination_l = f'{os.path.dirname(os.path.realpath(__file__))}/temp.txt'
-
         response = requests.get(url_l)
-    
         if response.status_code == 200:
             with open(destination_l, 'wb') as file:
                 file.write(response.content)
+            with open(destination_l, 'r') as file:
+                line_count = sum(1 for line in file)
+        
+        action_count = action_count + line_count
+
+        progress_per_task = 100 / action_count
+
         try:
             with open(destination_l, 'r') as file:
                 for line in file:
                     os.system(f'cmd /c "pip install {line.strip().lower()}"')
+                    progressbar.step(progress_per_task)
 
-                    license_text.configure(state='normal')	
-                    license_text.insert('end', f'\nSuccessfully installed "{line.strip()}"')
-                    license_text.configure(state='disabled')
         except FileNotFoundError:
             print(f"File not found: {destination_l}")
         except Exception as e:
             print(f"An error occurred: {e}")
+
+
         try:
             os.remove(destination_l)
+            progressbar.step(progress_per_task)
         except FileNotFoundError:
             print(f"File not found: {destination_l}")
         except Exception as e:
             print(f"An error occurred: {e}")
-
-
-        license_text.configure(state='normal')
-        license_text.insert('end', '\n\nSuccessfully installed necessary Libraries\n\n------------------------------\n\n')
-        license_text.insert('end', 'Downloading necessary files...\n')
-        license_text.insert('end', '\n\nDownloading Main-Build...')
-        license_text.configure(state='disabled')
-
-        response = requests.get('https://thelecraft999.github.io/JARVIS/latest/jarvis.py')
+        response = requests.get('https://thelecraft999.github.io/jarvis/latest/jarvis.py')
             
         if response.status_code == 200:
                 with open(f'{os.path.dirname(os.path.realpath(__file__))}/jarvis.py', 'wb') as file:
                     file.write(response.content)
-                license_text.insert('end', '\n\nDownloading Main-Build')
+                    progressbar.step(progress_per_task - 0.0001)
+                accept_button.configure(command=script.juno, text='Installed')
         else:
+            print(f"Failed to download file. Status code: {response.status_code}")
+
+    def check_checkboxes():
+        if download_instructions.get() == 1:
+            print('check')
+            response = requests.get('https://thelecraft999.github.io/jarvis/latest/JARVIS_DOCUMENTATION.pdf')
+            
+            if response.status_code == 200:
+                    with open(f'{os.path.dirname(os.path.realpath(__file__))}/documentation.pdf', 'wb') as file:
+                        file.write(response.content)
+            else:
                 print(f"Failed to download file. Status code: {response.status_code}")
-        
+
+        if accept_tos.get() == 1:
+            script.download_and_install()
+        else:
+            tos_label = ttk.Label(
+                master=root,
+                text='Please accept TOS, TOU, EULA'
+            )
+            tos_label.place(x=260,y=280)
 
 
-        license_text.configure(state='normal')
-        license_text.insert('end', '\nSuccessfully downloaded Main-Build\n')
-        license_text.insert('end', 'Successfully donwloaded necessary files')
-        license_text.insert('end', '\n\nInstallation complete')
-        license_text.configure(state='disabled')
-
-        accept_button.configure(command=script.juno, text='Installed')
-
+    def execute_functions():
+        t = Thread(target=script.check_checkboxes)
+        t.start()    
 
 
 if __name__ == '__main__':
-
     root = ttk.Window()
-    root.title('JARVIS Installer -- 1.5')
-    root.geometry('700x650')
-
-
+    root.title('JARVIS Installer -- 2.0')
+    root.geometry('700x400')
     title_label = ttk.Label(master=root,
-                                    text='JARVIS Installer',
-                                    font='Calibri 24 bold')
-            
-            
-    license_frame = ttk.Frame(master= root)
-    bottom_label = ttk.Label(master=license_frame,
-                                    text='If you click "accept" you accpet our Terms of Use and our End User License Agreement (EULA)',
-                                    font='Calibri 8')
-            
-    license_text = tk.Text(root, state='normal', width=80, height=20)
-    license_text.configure(state='normal')
-    license_text.insert('end', '''
-    Terms of Use / End User License Agreement
-
-    1. DONT COPY THE APP OR OTHER CONTENT published by ThaliumZ-Studios or TheLeCraft999
-
-    2. DONT PASS OF ANY PRODUCT published by ThaliumZ-Studios or TheLeCraft999 AS YOURS
-
-    3.  /
-
-    4.  /
-
-    5.  / 
-
-    6.  /
-
-    7.  /
-
-    8.  /
-            ''')
-    license_text.configure(state='disabled')
-
-    information_frame = ttk.Frame(master= root)
-    password_entry = ttk.Entry(master=information_frame)
-    city_entry = ttk.Entry(master=information_frame)
-    api_key_entry = ttk.Entry(master=information_frame)
-
-
-    contact_information = tk.Label(text='''Information:
-    Email: thelecraft999@gmail.com
-    Discord: thelecraft999
-    Github-Page: thelecraft999.github.io''')
-            
-    information = tk.Label(text='Note:\nInstalation can take a moment\nYou will automatically download the latest version')
-            
-
-    controlbutton_frame = ttk.Frame(master = root)
-    cancel_button = ttk.Button(master=controlbutton_frame,
-                                text='Cancel',
-                                command=quit)
-    accept_button = ttk.Button(master=controlbutton_frame,
-                                text='Accept & Install',
-                                command=threading.Thread(target=script.install_and_download).start)
-
-
+                                text='JARVIS Installer',
+                                font='Calibri 24 bold')
     title_label.pack()
-    bottom_label.pack()
-    license_text.pack()
-    license_frame.pack()
-    information_frame.pack()
-    contact_information.pack(pady=13)
-    information.pack(pady=5)
-    controlbutton_frame.pack()
-    accept_button.pack(side='right')
-    cancel_button.pack(side='right')
+    progressbar = ttk.Progressbar()
+    progressbar.place(x=100, y=100, width=500)    
+        
+    download_instructions = ttk.IntVar()
+    accept_tos = ttk.IntVar()
 
+    c1 = ttk.Checkbutton(root, text='Download Documentation-PDF', onvalue=1, offvalue=0, variable=download_instructions)
+    c1.state(['!alternate'])
+    c1.place(x=100, y=150)
 
-
+    c2 = ttk.Checkbutton(root, text='I accept the TOS, TOU \nand EULA (https://thelecraft999.github.io/jarvis/tos)', onvalue=1, offvalue=0, variable=accept_tos)
+    c2.state(['!alternate'])
+    c2.place(x=100, y=175)
+    
+    accept_button = ttk.Button(master=root,
+                                text='Download & Install',
+                                command=script.execute_functions)
+    accept_button.place(x=275, y=250)
+    
     root.mainloop()
