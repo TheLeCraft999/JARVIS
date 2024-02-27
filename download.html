@@ -86,6 +86,88 @@
             padding: 20px;
             margin-left: 20px;
         }
+        .lower-download {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        .pl-control {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            margin: 10px;
+            width: 300px;
+        }
+        .pl-datetime {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            margin: 10px;
+            width: 300px;
+        }
+        .pl-openprogramm {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            margin: 10px;
+            width: 300px;
+        }
+        .pl-randomnumber {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            margin: 10px;
+            width: 300px;
+        }
+        .pl-setup {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            margin: 10px;
+            width: 300px;
+        }
+        .pl-weather {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            margin: 10px;
+            width: 300px;
+        }
+        .pl-writedown {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            margin: 10px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            width: 300px;
+        }
     </style>
 </head>
 <script>
@@ -99,13 +181,92 @@
         document.body.removeChild(link);
     }
     function download_docs() {
-        var url = 'https://thelecraft999.github.io/jarvis/latest/JARVIS DOCUMENTATION.pdf';
+        var url = 'https://thelecraft999.github.io/jarvis/latest/JARVIS_DOCUMENTATION.pdf';
         var link = document.createElement('a');
         link.href = url;
         link.download = 'installer.py';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    }
+    function download_control() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/control.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'control.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_datetime() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/datetime.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'datetime.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_openprogramm() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/openprogramm.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'openprogramm.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_randomnumber() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/randomnumber.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'randomnumber.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_setup() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/setup.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'setup.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_weather() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/weather.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'weather.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_writedown() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/writedown.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'writedown.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    window.onload = function() {
+      var file1Path = 'https://thelecraft999.github.io/jarvis/version';
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', file1Path);
+      xhr.onload = function() {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(xhr.responseText, 'text/html');
+        var firstContent = doc.getElementById('MAJOR').textContent;
+        var secondContent = doc.getElementById('MINOR').textContent;
+        var thirdContent = doc.getElementById('PATCH').textContent;
+
+        document.getElementById('version').textContent += firstContent + "." + secondContent + "." + thirdContent;
+      };
+      xhr.send();
     }
 </script>
 <body>
@@ -126,7 +287,7 @@
     <div class="upper-download">
         <div class="software-download">
             <h1>Software-Download</h1>
-            <p><b>Version:</b> 0.2.10</p>
+            <p><strong>Version:</strong> <span id="version"></span></p>
             <h2>System-Requirements</h2>
             <p><b>CPU:</b> Intel i5-5200 or better</p>
             <p><b>RAM:</b> 4 GB or more</p>
@@ -140,6 +301,65 @@
             <p>Download the Documentation, in which</p>
             <p>you can find everything you need to operate JARVIS</p>
             <button onclick="download_docs()">Download Documentation</button>
+        </div>
+    </div>
+    <div class="lower-download">
+        <div class="pl-control">
+            <h1>Control-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- exit:</b> Shuts down your system</p>
+            <p><b>- afk:</b> Locks your system</p>
+            <p><b>- reload:</b> Restarts jarvis</p>
+            <h2>Important to know:</h2>
+            <p>This Plugin only works on</p>
+            <p>Windows 10 or above</p>
+            <button onclick="download_control()">Download Plugin</button>
+        </div>
+        <div class="pl-datetime">
+            <h1>Datetime-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- date:</b> Tells you the date</p>
+            <p><b>- time:</b> Tells you the time</p>
+            <h2>Important to know:</h2>
+            <p>Make sure the time and date</p>
+            <p>is set correct on your system</p>
+            <button onclick="download_datetime()">Download Plugin</button>
+        </div>
+        <div class="pl-openprogramm">
+            <h1>Openprogramm-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- openprogramm:</b> Opens a programm of your choice</p>
+            <p><b>- makeownpath:</b> Add paths to open</p>
+            <h2>Important to know:</h2>
+            <p>This plugin can be a little bit tricky,</p>
+            <p>just test a little around and read</p>
+            <p>the file you get with the download</p>
+            <button onclick="download_openprogramm()">Download Plugin</button>
+        </div>
+        <div class="pl-randomnumber">
+            <h1>Randomnumber-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- randomnumber:</b> Generates a random number</p>
+            <button onclick="download_randomnumber()">Download Plugin</button>
+        </div>
+        <div class="pl-setup">
+            <h1>Setup-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- changePassword:</b> Change your Password for JARVIS</p>
+            <button onclick="download_setup()">Download Plugin</button>
+        </div>
+        <div class="pl-weather">
+            <h1>Weather-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- weather:</b> Displays you the weather</p>
+            <p><b>- configureWeather:</b> Change weather-settings</p>
+            <button onclick="download_weather()">Download Plugin</button>
+        </div>
+        <div class="pl-writedown">
+            <h1>Writedown-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- write:</b> Writes your speech down</p>
+            <button onclick="download_writedown()">Download Plugin</button>
         </div>
     </div>
 </body>
