@@ -25,12 +25,12 @@ def checkcommand():
     while True:
         userSaid = takecommand()
         module_name, command_name, keyword = get_config_command(userSaid)
-        if dev_mode == 'True':
+        if dev_mode == 'true':
             print(f'{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} Module-Name: {module_name}, Command-Name: {command_name}')
         if module_name and command_name:
             if '(' in command_name and ')' in command_name:
                 new_command_name = command_name.split('(')[0].strip()
-                if dev_mode == 'True':
+                if dev_mode == 'true':
                     print(f'{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} Old Command-Name: {command_name}, New Command-Name: {new_command_name}')
                 if hasattr(loaded_modules[module_name], new_command_name):
                     function_to_execute = getattr(loaded_modules[module_name], new_command_name)
@@ -40,14 +40,14 @@ def checkcommand():
                                 text_between_parentheses = command_name[start_index + 1:end_index].strip()
                                 function_to_execute(eval(text_between_parentheses), keyword)
                 else:
-                    if dev_mode == 'True':
+                    if dev_mode == 'true':
                         print(f"{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} The function {command_name} does not exist.")
             else:
                 if hasattr(loaded_modules[module_name], command_name):
                     function_to_execute = getattr(loaded_modules[module_name], command_name)
                     function_to_execute()
                 else:
-                    if dev_mode == 'True':
+                    if dev_mode == 'true':
                         print(f"{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} The function {command_name} does not exist.")
         if 'logout' in userSaid:
              lock()
@@ -71,7 +71,7 @@ def takecommand():
             print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Spoken: {Fore.GREEN}{text}{Style.RESET_ALL}')
             return text  
     except:
-        if dev_mode == 'True':
+        if dev_mode == 'true':
             print(f'{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} ERROR in takecommand')
         main()
  
@@ -273,40 +273,52 @@ def generate_password(pw):
     return hashed_string
 
 
-def firstsetup():
-    pw = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set a password (type "None" to skip using a password)\n> ')
-    if (pw == None) or (pw == ''):
-        print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Password cant be empty')
-        firstsetup()
-        print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Restart JARVIS to continue')
-        time.sleep(5)
-        quit()
-    voice = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set voice (use a English [US] voice to obtain best experience; numeral only)\n> ')    
-    hashed_pw = generate_password(pw)
-    os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/data')
-    with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'w') as file:
-        file.write(f'password={hashed_pw}\n')
-        file.write(f'voice={voice}\n')
-        file.write(f'devmode=False')
-    with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py', 'w') as file:
-        file.write('''import os
+def check_fix_cmds():
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds'):
+        os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/cmds')
+
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py'):
+        with open(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py', 'w') as file:
+            file.close()
+
+
+def check_fix_data():
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data'):
+        os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/data')
+
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/__init__.py'):
+        with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/__init__.py', 'w') as file:
+            file.close()
+
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt'):
+        with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt', 'w') as file:
+            file.close()
+
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt'):
+        while True:
+            pw = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set a password (type "None" to skip using a password)\n> ')
+            if (pw == None) or (pw == ''):
+                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Password cant be empty')
+            else:
+                break
+        voice = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set voice (use a English [US] voice to obtain best experience; numeral only)\n> ')    
+        hashed_pw = generate_password(pw)
+        with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'w') as file:
+            file.write(f'password={hashed_pw}\n')
+            file.write(f'voice={voice}\n')
+            file.write(f'devmode=false')
+
+    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py'):
+        with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py', 'w') as file:
+            file.write('''import os
 MAJOR = '0'
 MINOR = '2'
-PATCH = '10'
+PATCH = '11'
 VERSION = f'{MAJOR}.{MINOR}.{PATCH}'
 DATA_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_PATH = os.path.join(DATA_DIR, "data.txt")
 JARVIS_DIR = os.path.dirname(DATA_DIR)
 CMDS_DIR = os.path.join(JARVIS_DIR, 'cmds')''')
-    with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/__init__.py', 'w') as file:
-        file.close()
-    with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt', 'w') as file:
-        file.close()
-    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds'):
-        os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/cmds')
-    if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py'):
-        with open(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py', 'w') as file:
-            file.close()
 
 
 def import_cmds():
@@ -330,113 +342,28 @@ def import_cmds():
 
 
 if __name__ == '__main__':
-    if os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data') or os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds'):
-        if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds'):
-            os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/cmds')
-            if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py'):
-                with open(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py', 'w') as file:
-                    file.close()
-        if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds'):
-            pw = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set a password (type "None" to skip using a password)\n> ')
-            if (pw == None) or (pw == ''):
-                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Password cant be empty')
-                firstsetup()
-                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Restart JARVIS to continue')
-                time.sleep(5)
-                quit()
-            voice = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set voice (use a English [US] voice to obtain best experience; numeral only)\n> ')    
-            hashed_pw = generate_password(pw)
-            os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/data')
-            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'w') as file:
-                file.write(f'password={hashed_pw}\n')
-                file.write(f'voice={voice}\n')
-                file.write(f'devmode=False')
-            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py', 'w') as file:
-                file.write('''import os
-MAJOR = '0'
-MINOR = '2'
-PATCH = '10'
-VERSION = f'{MAJOR}.{MINOR}.{PATCH}'
-DATA_DIR = os.path.dirname(os.path.realpath(__file__))
-DATA_PATH = os.path.join(DATA_DIR, "data.txt")
-JARVIS_DIR = os.path.dirname(DATA_DIR)
-CMDS_DIR = os.path.join(JARVIS_DIR, 'cmds')''')
-            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/__init__.py', 'w') as file:
-                file.close()
-            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt', 'w') as file:
-                file.close()
-        if all(os.path.exists(os.path.join(f'{os.path.dirname(os.path.realpath(__file__))}/data', file)) for file in ['__init__.py', 'data.txt', 'globalvar.py', 'config.txt']):
-            from data import globalvar
+    check_fix_cmds()
+    check_fix_data()
+    from data import globalvar
+    loaded_modules = import_cmds()
+    with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'r') as file:
+        for line in file:
+            if line.startswith("devmode="):
+                dev_mode = line[len("devmode="):].strip()
+    if dev_mode == 'true':
+        for variable_name, module in loaded_modules.items():
+            print(f"{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} {variable_name}: {module.__name__}")    
 
-            if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py'):
-                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} {Fore.RED}Corrupted files found{Style.RESET_ALL}')
-                with open(f'{os.path.dirname(os.path.realpath(__file__))}/cmds/__init__.py', 'w') as file:
-                    file.close()
-                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} {Fore.LIGHTGREEN_EX}Corrupted files repaired{Style.RESET_ALL}')
-                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Restart JARVIS to continue')
-                time.sleep(5)
-                quit()
-            loaded_modules = import_cmds()
-            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'r') as file:
-                    for line in file:
-                        if line.startswith("devmode="):
-                            dev_mode = line[len("devmode="):].strip()
-            if dev_mode == 'True':
-                for variable_name, module in loaded_modules.items():
-                    print(f"{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} {variable_name}: {module.__name__}")    
-        else:
-            counter = 0
-            print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} {Fore.RED}Corrupted files found{Style.RESET_ALL}')
-            if [file for file in ['__init__.py', 'data.txt', 'globalvar.py', 'config.txt'] if not os.path.exists(os.path.join(f'{os.path.dirname(os.path.realpath(__file__))}/data', file))]:
-                while counter < 4:
-                    for file_not_found in [file for file in ['__init__.py', 'data.txt', 'globalvar.py', 'config.txt'] if not os.path.exists(os.path.join(f'{os.path.dirname(os.path.realpath(__file__))}/data', file))]:
-                        if file_not_found == '__init__.py':
-                            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/__init__.py', 'w') as file:
-                                file.close()
-                        if file_not_found == 'globalvar.py':
-                                with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py', 'w') as file:
-                                    file.write('''import os
-MAJOR = '0'
-MINOR = '2'
-PATCH = '10'
-VERSION = f'{MAJOR}.{MINOR}.{PATCH}'
-DATA_DIR = os.path.dirname(os.path.realpath(__file__))
-DATA_PATH = os.path.join(DATA_DIR, "data.txt")
-JARVIS_DIR = os.path.dirname(DATA_DIR)
-CMDS_DIR = os.path.join(JARVIS_DIR, 'cmds')''')
-                        if file_not_found == 'data.txt':
-                            pw = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set a password (type "None" to skip using a password)\n> ')
-                            if (pw == None) or (pw == ''):
-                                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Password cant be empty')
-                                quit()
-                            voice = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Set voice (use a English [US] voice to obtain best experience; numeral only)\n> ')    
-                            hashed_pw = generate_password(pw)
-                            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'w') as file:
-                                file.write(f'password={hashed_pw}\n')
-                                file.write(f'voice={voice}\n')
-                                file.write(f'devmode=False')
-                        if file_not_found == 'config.txt':
-                            with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt', 'w') as file:
-                                file.close()
-                        counter =+ 1
-                    print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} {Fore.LIGHTGREEN_EX}Corrupted files repaired{Style.RESET_ALL}')
-                    print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Restart JARVIS to continue')
-                    time.sleep(5)
-                    quit()
-    else:
-        firstsetup()
-        print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Restart JARVIS to continue')
-        time.sleep(5)
-        quit()
     with open(globalvar.DATA_PATH, 'r') as file:
                 for line in file:
                     if line.startswith("voice="):
                         voice = line[len("voice="):].strip()
+
     engine = pyttsx3.init('sapi5')
     engine.setProperty('rate', 150)
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[int(voice)].id)
-    if dev_mode == 'True':
+    if dev_mode == 'true':
         print(f'{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} Voice loaded')
     tprint('JARVIS')
     print(f'Version: {globalvar.VERSION}')
