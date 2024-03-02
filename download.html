@@ -190,6 +190,15 @@
         document.body.removeChild(link);
     }
     function download_control() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/autoimport.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'control.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    function download_control() {
         var url = 'https://thelecraft999.github.io/jarvis/latest/commands/control.zip';
         var link = document.createElement('a');
         link.href = url;
@@ -221,15 +230,6 @@
         var link = document.createElement('a');
         link.href = url;
         link.download = 'randomnumber.zip';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-    function download_setup() {
-        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/setup.zip';
-        var link = document.createElement('a');
-        link.href = url;
-        link.download = 'setup.zip';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -304,6 +304,12 @@
         </div>
     </div>
     <div class="lower-download">
+        <div class="pl-autoimport">
+            <h1>Auto-Import-Plugin</h1>
+            <h2>Commands-Included</h2>
+            <p><b>- autoimport:</b> Makes importing new commands much easier than manual</p>
+            <button onclick="download_autoimport()">Download Plugin</button>
+        </div>
         <div class="pl-control">
             <h1>Control-Plugin</h1>
             <h2>Commands-Included:</h2>
@@ -341,12 +347,6 @@
             <h2>Commands-Included:</h2>
             <p><b>- randomnumber:</b> Generates a random number</p>
             <button onclick="download_randomnumber()">Download Plugin</button>
-        </div>
-        <div class="pl-setup">
-            <h1>Setup-Plugin</h1>
-            <h2>Commands-Included:</h2>
-            <p><b>- changePassword:</b> Change your Password for JARVIS</p>
-            <button onclick="download_setup()">Download Plugin</button>
         </div>
         <div class="pl-weather">
             <h1>Weather-Plugin</h1>
