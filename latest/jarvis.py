@@ -55,6 +55,8 @@ def checkcommand():
              lock()
         if 'turn off' in userSaid:
             quit()
+        if 'change password' in userSaid:
+            changePassword()
         main()
 
 
@@ -273,6 +275,33 @@ def generate_password(pw):
     return hashed_string
 
 
+def changePassword():
+    engine.say('Please look in the Terminal')
+    engine.runAndWait()
+
+    new_pw = input(f'\n{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} New password (type "None" to skip using a password)\n> ')
+    confirm_pw = input(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Confirm password \n> ')
+
+    hashed_pw = generate_password(new_pw)
+
+    if new_pw == confirm_pw:
+        if new_pw == None:
+            print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Please enter a password! If you want to contiune, run this function again')
+        else:
+            lines = []
+            with open(globalvar.DATA_PATH, 'r') as file:
+                for line in file:
+                    if line.startswith('password'):
+                        lines.append(f'password={hashed_pw}\n')
+                    else:
+                        lines.append(line)
+
+            with open(globalvar.DATA_PATH, 'w') as file:
+                file.writelines(lines)
+    else:
+        print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Given passwords didnt match! If you want to contiune, run this function again')
+
+
 def check_fix_cmds():
     if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/cmds'):
         os.mkdir(f'{os.path.dirname(os.path.realpath(__file__))}/cmds')
@@ -292,7 +321,7 @@ def check_fix_data():
 
     if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt'):
         with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/config.txt', 'w') as file:
-            file.close()
+            file.write('module_name;command_name;//keywordhttps')
 
     if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt'):
         while True:
@@ -313,7 +342,7 @@ def check_fix_data():
             file.write('''import os
 MAJOR = '0'
 MINOR = '2'
-PATCH = '11'
+PATCH = '12'
 VERSION = f'{MAJOR}.{MINOR}.{PATCH}'
 DATA_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_PATH = os.path.join(DATA_DIR, "data.txt")
@@ -346,7 +375,7 @@ if __name__ == '__main__':
     check_fix_data()
     from data import globalvar
     loaded_modules = import_cmds()
-    with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/data.txt', 'r') as file:
+    with open(f'{globalvar.DATA_PATH}', 'r') as file:
         for line in file:
             if line.startswith("devmode="):
                 dev_mode = line[len("devmode="):].strip()
