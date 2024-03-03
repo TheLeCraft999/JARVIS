@@ -9,4 +9,4 @@ Pyperclip
 Pyautogui
 BS4
 opencv-python
-Spotify
+Spotipy
