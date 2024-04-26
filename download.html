@@ -91,6 +91,17 @@
             margin-top: 15px;
             padding: 10px;
         }
+        .pl-alarmclock {
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid black;
+            padding: 4px;
+            margin: 10px;
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+            height: 450px;
+            width: 300px;
+        }
         .pl-autoimport {
             font-family: 'Roboto', sans-serif;
             border: 2px solid black;
@@ -189,6 +200,15 @@
         link.click();
         document.body.removeChild(link);
     }
+    function download_alarmclock() {
+        var url = 'https://thelecraft999.github.io/jarvis/latest/commands/alarmclock.zip';
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'alarmclock.zip';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
     function download_autoimport() {
         var url = 'https://thelecraft999.github.io/jarvis/latest/commands/autoimport.zip';
         var link = document.createElement('a');
@@ -272,7 +292,7 @@
 <body>
     <div class="header">
             <div class="left-header">
-            <a href="index.html">
+            <a href="https://thelecraft999.github.io">
                 <img class="logo" src="assets/thaliumz.png" alt="ThaliumZ-Logo">
             </a>
             <a href="index.html" id="jarvis-text"><h2>JARVIS</h2></a>
@@ -304,6 +324,17 @@
         </div>
     </div>
     <div class="lower-download">
+        <div class="pl-alarmclock">
+            <h1>Alarmclock-Plugin</h1>
+            <h2>Commands-Included:</h2>
+            <p><b>- addAlarm:</b> Add an alarm</p>
+            <p><b>- deleteSpecificAlarm:</b> Delete a specific Alarm</p>
+            <p><b>- resetAlarms:</b> Delete all Alarms</p>
+            <h2>Important to know:</h2>
+            <p>The weather Plugin is required to use</p>
+            <p>this module</p>
+            <button onclick="download_alarmclock()">Download Plugin</button>
+        </div>
         <div class="pl-autoimport">
             <h1>Auto-Import-Plugin</h1>
             <h2>Commands-Included</h2>
