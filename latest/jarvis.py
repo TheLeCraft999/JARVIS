@@ -23,6 +23,7 @@ cl_init()
 
 def checkcommand():
     while True:
+        loaded_modules = import_cmds()
         userSaid = takecommand()
         module_name, command_name, keyword = get_config_command(userSaid)
         if dev_mode == 'true':
@@ -265,6 +266,12 @@ def updater():
         print(f'{Fore.LIGHTGREEN_EX}You are running the latest version!{Style.RESET_ALL}')
         print()
         print('--------------------------------------------------------------------------------')
+    loaded_modules = import_cmds()
+    if dev_mode == 'true':
+        for variable_name, module in loaded_modules.items():
+            print(f"{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} {variable_name}: {module.__name__}") 
+        print('--------------------------------------------------------------------------------')
+
     main()
 
 
@@ -342,7 +349,7 @@ def check_fix_data():
             file.write('''import os
 MAJOR = '0'
 MINOR = '2'
-PATCH = '12'
+PATCH = '13'
 VERSION = f'{MAJOR}.{MINOR}.{PATCH}'
 DATA_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_PATH = os.path.join(DATA_DIR, "data.txt")
@@ -357,7 +364,7 @@ def import_cmds():
     if os.path.exists(cmds_dir) and os.path.isdir(cmds_dir):
         os.chdir(cmds_dir)
         for file_name in os.listdir(cmds_dir):
-            if file_name.endswith(".py") and file_name != "__init__.py":
+            if file_name.endswith(".py") and not file_name.startswith('_'):
                 module_name = file_name[:-3]
                 module = importlib.import_module(f'cmds.{module_name}', '.')
                 variable_name = f"m{len(modules) + 1}"
@@ -374,14 +381,10 @@ if __name__ == '__main__':
     check_fix_cmds()
     check_fix_data()
     from data import globalvar
-    loaded_modules = import_cmds()
     with open(f'{globalvar.DATA_PATH}', 'r') as file:
         for line in file:
             if line.startswith("devmode="):
-                dev_mode = line[len("devmode="):].strip()
-    if dev_mode == 'true':
-        for variable_name, module in loaded_modules.items():
-            print(f"{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} {variable_name}: {module.__name__}")    
+                dev_mode = line[len("devmode="):].strip()   
 
     with open(globalvar.DATA_PATH, 'r') as file:
                 for line in file:
