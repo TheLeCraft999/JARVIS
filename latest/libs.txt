@@ -10,3 +10,5 @@ Pyautogui
 BS4
 opencv-python
 Spotipy
+Win10Toast
+Win11Toast
