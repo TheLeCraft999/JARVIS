@@ -345,11 +345,25 @@ def check_fix_data():
             file.write(f'devmode=false')
 
     if not os.path.exists(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py'):
+        try:
+            url = "https://thelecraft999.github.io/jarvis/version.html"
+            response = requests.get(url)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                major = soup.find('p', id='MAJOR').get_text()
+                minor = soup.find('p', id='MINOR').get_text()
+                patch = soup.find('p', id='PATCH').get_text()
+            else:
+                print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Failed to check for the current version, please check your Internet-Settings')
+                quit()
+        except:
+            print(f'{Fore.MAGENTA}{dt.datetime.now().strftime("[%H:%M:%S]")}{Style.RESET_ALL} Failed to check for the current version, please check your Internet-Settings')
+            quit()
         with open(f'{os.path.dirname(os.path.realpath(__file__))}/data/globalvar.py', 'w') as file:
             file.write('''import os
-MAJOR = '0'
-MINOR = '2'
-PATCH = '13'
+MAJOR = "0"
+MINOR = "2"
+PATCH = "14"
 VERSION = f'{MAJOR}.{MINOR}.{PATCH}'
 DATA_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_PATH = os.path.join(DATA_DIR, "data.txt")
@@ -395,6 +409,7 @@ if __name__ == '__main__':
     engine.setProperty('rate', 150)
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[int(voice)].id)
+    os.system('cls')
     if dev_mode == 'true':
         print(f'{Fore.LIGHTBLACK_EX}[{Fore.RED}DEV-MODE{Fore.LIGHTBLACK_EX}]{Style.RESET_ALL} Voice loaded')
     tprint('JARVIS')
