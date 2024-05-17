@@ -1,4 +1,5 @@
 import os
+print("Loading...")
 os.system('cmd /c "pip install ttkbootstrap"')
 os.system('cmd /c "pip install requests"')
 import ttkbootstrap as ttk
@@ -56,7 +57,6 @@ class script():
 
     def check_checkboxes():
         if download_instructions.get() == 1:
-            print('check')
             response = requests.get('https://thelecraft999.github.io/jarvis/latest/JARVIS_DOCUMENTATION.pdf')
             
             if response.status_code == 200:
@@ -82,7 +82,7 @@ class script():
 
 if __name__ == '__main__':
     root = ttk.Window()
-    root.title('JARVIS Installer -- 2.0')
+    root.title('JARVIS Installer -- 2.2')
     root.geometry('700x400')
     title_label = ttk.Label(master=root,
                                 text='JARVIS Installer',
