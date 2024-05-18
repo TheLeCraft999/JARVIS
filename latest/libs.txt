@@ -11,3 +11,4 @@ BS4
 opencv-python
 Spotipy
 Win10Toast
+Keyboard
