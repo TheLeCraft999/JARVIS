@@ -12,3 +12,5 @@ opencv-python
 Spotipy
 Win10Toast
 Keyboard
+PyGame
+PyCaw
